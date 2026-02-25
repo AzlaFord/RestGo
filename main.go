@@ -1,20 +1,16 @@
 package main
 
 import (
-	"fmt"
+	"RestGo/routes"
+	"RestGo/storage"
 	"log"
 	"net/http"
 )
 
-func newPeopleHandler() http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "This is the people handler.")
-	})
-}
-
 func main() {
+	storage.ReadStorage()
 	mux := http.NewServeMux()
 	mux.Handle("/resources", http.NotFoundHandler())
-	mux.Handle("/resources/people", newPeopleHandler())
+	mux.Handle("/resources/people", routes.NewPeopleHandler())
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }
