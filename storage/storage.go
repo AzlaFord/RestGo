@@ -3,6 +3,7 @@ package storage
 import (
 	"RestGo/structs"
 	"encoding/json"
+	"fmt"
 	"log"
 	"os"
 )
@@ -20,5 +21,13 @@ func ReadStorage() []structs.TodoStorage {
 		return []structs.TodoStorage{}
 	}
 	return structToDo
+}
 
+func SaveStorage(m []structs.TodoStorage) {
+	b, err := json.Marshal(m)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	os.WriteFile("storage/storage.json", b, 0666)
 }
