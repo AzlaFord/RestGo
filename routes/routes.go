@@ -1,12 +1,18 @@
 package routes
 
 import (
-	"fmt"
+	"io"
 	"net/http"
 )
 
 func NewPeopleHandler() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "This is the people handler.")
+		io.WriteString(w, "This is the people handler.\n")
+	})
+}
+
+func ListTodos() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+
 	})
 }
